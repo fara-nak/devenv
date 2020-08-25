@@ -18,6 +18,7 @@ RUN apt-get -y update &&\
     software-properties-common \
     git \
     ssh-client \
+    fonts-firacode \
     locales &&\
     locale-gen en_US.UTF-8 &&\
     export LC_ALL=en_US.UTF-8 &&\
@@ -57,7 +58,9 @@ RUN tlmgr install \
 
 # Install zsh + oh my zsh
 RUN sh -c "$(wget -O- https://raw.githubusercontent.com/deluan/zsh-in-docker/master/zsh-in-docker.sh)" -- \
-    -t agnoster
+    -p https://github.com/zsh-users/zsh-autosuggestions \
+    -p https://github.com/zsh-users/zsh-completions \
+    -p https://github.com/zsh-users/zsh-history-substring-search
 
 # Set the default shell to zsh rather than bash
 ENTRYPOINT [ "/bin/zsh" ]
