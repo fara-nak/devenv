@@ -11,14 +11,15 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 COPY package_lists /package_lists
 COPY install_scripts /install_scripts
+COPY install_scripts /install_scripts
 
 # Ubuntu Setup
 RUN apt-get -y update &&\
     apt-get -y --no-install-recommends install \
     software-properties-common \
     git \
+    zsh \
     ssh-client \
-    fonts-firacode \
     locales &&\
     locale-gen en_US.UTF-8 &&\
     export LC_ALL=en_US.UTF-8 &&\
@@ -56,11 +57,10 @@ ENV PATH="/usr/local/texlive/bin/x86_64-linux:${PATH}"
 RUN tlmgr install \
     $(grep -o '^[^#]*' package_lists/latex_packages.txt | tr '\n' ' ')
 
-# Install zsh + oh my zsh
-RUN sh -c "$(wget -O- https://raw.githubusercontent.com/deluan/zsh-in-docker/master/zsh-in-docker.sh)" -- \
-    -p https://github.com/zsh-users/zsh-autosuggestions \
-    -p https://github.com/zsh-users/zsh-completions \
-    -p https://github.com/zsh-users/zsh-history-substring-search
-
 # Set the default shell to zsh rather than bash
+RUN mkdir -p "$HOME/.zsh" &&\
+    git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+
+COPY .misc/.zshrc /root/.
+
 ENTRYPOINT [ "/bin/zsh" ]

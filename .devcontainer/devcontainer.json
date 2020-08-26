@@ -1,6 +1,6 @@
 {
     "name": "devenv",
-    "image": "berrij/devenv:latest",
+    "image": "berrij/devenv:dev",
     // Grant xhost access to root user in order to start x11 devices (r plots)
     "initializeCommand": "docker pull berrij/devenv:latest; xhost local:root",
     // Arguments to docker run so container can use local x11
@@ -60,9 +60,7 @@
         "editor.formatOnPaste": true,
         "editor.formatOnType": true,
         // Use zsh
-        "terminal.integrated.shell.linux": "/bin/zsh",
-        "terminal.integrated.fontFamily": "'Fira Code'",
-        "terminal.integrated.fontWeight": "500"
+        "terminal.integrated.shell.linux": "/bin/zsh"
         
     }
 }
