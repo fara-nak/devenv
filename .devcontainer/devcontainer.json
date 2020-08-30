@@ -1,7 +1,11 @@
 {
     "name": "devenv",
     "image": "berrij/devenv:master",
-    // "initializeCommand": ".devcontainer/initializeCommand.sh",
+
+    // Pull latest image from master branch
+    // Grant xhost access to root users in order to start x11 devices (r plots)
+    // Don't run in a codespaces environment see https: //github.com/MicrosoftDocs/vscodespaces/issues/777
+    "initializeCommand": "docker pull berrij/devenv:master; if [ '$CODESPACES' = false ]; then xhost local:root; fi",
     // Arguments to docker run so container can use local x11
     "runArgs": [
         "--rm",
