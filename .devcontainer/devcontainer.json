@@ -1,8 +1,7 @@
 {
     "name": "devenv",
     "image": "berrij/devenv:master",
-    // Grant xhost access to root user in order to start x11 devices (r plots)
-    "initializeCommand": "docker pull berrij/devenv:master; xhost local:root",
+    "initializeCommand": ".devcontainer/initializeCommand.sh",
     // Arguments to docker run so container can use local x11
     "runArgs": [
         "--rm",
