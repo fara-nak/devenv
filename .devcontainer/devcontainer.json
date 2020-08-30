@@ -1,7 +1,7 @@
 {
     "name": "devenv",
     "image": "berrij/devenv:master",
-    "initializeCommand": ".devcontainer/initializeCommand.sh",
+    // "initializeCommand": ".devcontainer/initializeCommand.sh",
     // Arguments to docker run so container can use local x11
     "runArgs": [
         "--rm",
